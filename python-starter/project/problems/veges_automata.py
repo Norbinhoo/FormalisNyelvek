@@ -3,17 +3,23 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(description="Véges automata determinizálása")
-    parser.add_argument("--input", required=True, help="A bemeneti fájl útvonala")
-    parser.add_argument("--output", required=True, help="A kimeneti fájl útvonala")
-    parser.add_argument("--det", action="store_true", help="Jelzi, hogy determinizálni kell az automatát")
+    parser.add_argument("--input", help="A bemeneti fájl útvonala")
+    parser.add_argument("--output", help="A kimeneti fájl útvonala")
+    parser.add_argument("--check", help="Ellenőrzési opció")
+    parser.add_argument("--sum", action="store_true", help="Összegzés opció")
+    parser.add_argument("--det", action="store_true", help="Determinizálás opció")
     args = parser.parse_args()
+
+    if not args.input or not args.output:
+        print("Hiba: Hiányzó input vagy output fájl.", file=sys.stderr)
+        sys.exit(1)
 
     # Beolvasás
     try:
         with open(args.input, 'r', encoding='utf-8') as f:
             lines = [line.strip() for line in f if line.strip()]
     except FileNotFoundError:
-        print(f"Hiba: A megbelelő bemeneti fájl nem található: {args.input}", file=sys.stderr)
+        print(f"Hiba: A bemeneti fájl nem található: {args.input}", file=sys.stderr)
         sys.exit(1)
 
     if len(lines) < 4:
@@ -57,10 +63,6 @@ def main():
         if key not in nfa_transitions:
             nfa_transitions[key] = set()
         nfa_transitions[key].add(dest)
-
-    # Ha nincs megadva a --det kapcsoló, de a feladat kéri
-    if not args.det:
-        print("Figyelem: A --det kapcsoló nem lett megadva, de a program folytatja a feldolgozást.")
 
     # Determinizálás (Hatványhalmaz-konstrukció)
     init_subset = frozenset([initial_state])
