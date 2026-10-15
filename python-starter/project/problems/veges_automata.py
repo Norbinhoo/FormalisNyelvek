@@ -7,8 +7,9 @@ def main():
     parser.add_argument("--output", help="A kimeneti fájl útvonala")
     parser.add_argument("--check", help="Ellenőrzési opció")
     parser.add_argument("--sum", action="store_true", help="Összegzés opció")
-    parser.add_argument("--det", action="store_true", help="Determinizálás opció")
-    args = parser.parse_args()
+    
+    # Ismeretlen argumentumok (pl. --det) kezelése hiba nélkül
+    args, unknown = parser.parse_known_args()
 
     if not args.input or not args.output:
         print("Hiba: Hiányzó input vagy output fájl.", file=sys.stderr)
