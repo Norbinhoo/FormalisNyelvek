@@ -95,9 +95,11 @@ class AndroidLogcatProblem(Problem):
                     error_counts[pid] = error_counts.get(pid, 0) + 1
 
             if error_counts:
-                max_pid = max(error_counts, key=error_counts.get)
-                max_errors = error_counts[max_pid]
-                output_lines.append(f"PID={max_pid} ({max_errors} errors)")
+                max_errors = max(error_counts.values())
+                max_pids = sorted([pid for pid, count in error_counts.items() if count == max_errors], key=lambda x: int(x) if x.isdigit() else x)
+                for max_pid in max_pids:
+                    err_label = "error" if max_errors == 1 else "errors"
+                    output_lines.append(f"PID={max_pid} ({max_errors} {err_label})")
             else:
                 output_lines.append("PID=None (0 errors)")
 
