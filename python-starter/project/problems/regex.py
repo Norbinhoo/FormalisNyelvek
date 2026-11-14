@@ -42,7 +42,7 @@ class AndroidLogcatProblem(Problem):
             p5 = re.compile(r'^[0-9-]+ 10:18:51\.\d+ +221 +')
             p6 = re.compile(r'^[0-9-]+ [0-9:.]+ +\d+ +\d+ E ')
             p7 = re.compile(r'^[0-9-]+ [0-9:.]+ +\d+ +\d+ W +[^:]*PackageManager[^:]*:', re.IGNORECASE)
-            p8 = re.compile(r'^[0-9-]+ [0-9:.]+ +\d+ +\d+ D +[^:]*ExoPlayer[^:]*:', re.IGNORECASE)
+            p8 = re.compile(r'^[0-9-]+ [0-9:.]+ +\d+ +\d+ D .*ExoPlayer')
             p9 = re.compile(r'^[0-9-]+ [0-9:.]+ +\d+ +\d+ [EW] .*\.java:')
             p10 = re.compile(r'^[0-9-]+ [0-9:.]+ +\d+ +\d+ [IDVEFAW] +[^:]+: .*Thread')
 
