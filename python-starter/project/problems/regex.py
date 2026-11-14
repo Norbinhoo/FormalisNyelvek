@@ -44,7 +44,7 @@ class AndroidLogcatProblem(Problem):
             p7 = re.compile(r'^[0-9-]+ [0-9:.]+ +\d+ +\d+ W +[^:]*PackageManager[^:]*:', re.IGNORECASE)
             p8 = re.compile(r'^[0-9-]+ [0-9:.]+ +\d+ +\d+ D +[^:]*ExoPlayer[^:]*:', re.IGNORECASE)
             p9 = re.compile(r'^[0-9-]+ [0-9:.]+ +\d+ +\d+ [EW] .*\.java:')
-            p10 = re.compile(r'^[0-9-]+ [0-9:.]+ +\d+ +\d+ [IDVEFAW] +[^:]+: .*\bThread\b')
+            p10 = re.compile(r'^[0-9-]+ [0-9:.]+ +\d+ +\d+ [IDVEFAW] +[^:]+: .*Thread')
 
             c1 = sum(1 for line in lines if p1.search(line))
             c2 = sum(1 for line in lines if p2.search(line))
